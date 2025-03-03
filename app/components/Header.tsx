@@ -9,7 +9,7 @@ export function Header() {
           <Link href={"/"}>Início</Link>
         </li>
         <li>
-          <Link href={"/filmes"}>Filmes</Link>
+          <Link href={"/movies"}>Filmes</Link>
         </li>
       </ul>
     </>

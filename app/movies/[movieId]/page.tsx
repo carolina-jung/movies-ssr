@@ -1,29 +1,31 @@
-import { useParams } from "react-router";
-import { useMovieDetails } from "../../hooks/useMovies";
+import { getMovieDetails } from "@/app/services/movies.service";
 import style from "./MovieDetails.module.css";
 
-export default function MovieDetails() {
-  const { id } = useParams();
-  const movie = useMovieDetails(id ? Number(id) : 0);
-
-  if (!movie) {
-    return <p>Carregando...</p>;
+export default async function MovieDetails({
+  params,
+}: {
+  readonly params: { movieId: number };
+}) {
+  if (!params?.movieId) {
+    return <p>Carregando....</p>;
   }
+
+  const movie = await getMovieDetails(params.movieId);
 
   return (
     <section className={style.movieDetails}>
       <figure className={style.movieDetailsPoster}>
-        {movie.backdrop_path && (
+        {movie.data.backdrop_path && (
           <img
-            src={`https://image.tmdb.org/t/p/w400/${movie.backdrop_path}`}
-            alt={movie.title}
+            src={`https://image.tmdb.org/t/p/w400/${movie.data.backdrop_path}`}
+            alt={movie.data.title}
           />
         )}
       </figure>
       <div className={style.movieDetailsInfo}>
-        <h1>{movie.title}</h1>
-        <p>Data de estreia: {movie.release_date}</p>
-        <p>{movie.overview}</p>
+        <h1>{movie.data.title}</h1>
+        <p>Data de estreia: {movie.data.release_date}</p>
+        <p>{movie.data.overview}</p>
       </div>
     </section>
   );

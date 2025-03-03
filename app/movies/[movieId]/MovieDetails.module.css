@@ -1,0 +1,23 @@
+.movieDetails {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+}
+
+.movieDetailsPoster {
+  text-align: center;
+}
+
+.movieDetailsInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-left: 20px;
+}

@@ -1,6 +1,7 @@
 import { Movie } from "@/app/interfaces/movie.interface";
 import style from "./MovieItem.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 interface MovieProps {
   movie: Movie;
@@ -36,7 +37,7 @@ export function MovieItem({ movie }: MovieProps) {
       )}
       <h3>{movie.title}</h3>
       <p>
-        <Link className={style.btnDetails} href={`/filmes/${movie.id}`}>
+        <Link className={style.btnDetails} href={`/movies/${movie.id}`}>
           Ver detalhes
         </Link>
         {/* {handleFavoriteButton()} */}
