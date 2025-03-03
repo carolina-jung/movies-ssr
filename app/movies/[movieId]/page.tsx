@@ -1,11 +1,30 @@
-import { getMovieDetails } from "@/app/services/movies.service";
+import {
+  getMovieDetails,
+  getPopularMovies,
+} from "@/app/services/movies.service";
 import style from "./MovieDetails.module.css";
+import { Movie } from "@/app/interfaces/movie.interface";
 
-export default async function MovieDetails({
-  params,
-}: {
-  readonly params: { movieId: number };
-}) {
+interface Params {
+  readonly params: {
+    movieId: number;
+  };
+}
+
+export async function getStaticPaths() {
+  const { data } = await getPopularMovies();
+
+  const paths = data.results.map((movie: Movie) => ({
+    params: { movieId: `${movie.id}` },
+  }));
+
+  return {
+    paths,
+    fallback: true,
+  };
+}
+
+export default async function MovieDetails({ params }: Params) {
   if (!params?.movieId) {
     return <p>Carregando....</p>;
   }
